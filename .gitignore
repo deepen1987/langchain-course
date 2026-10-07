@@ -1,0 +1,67 @@
+# Environment variables / secrets (python-dotenv)
+.env
+.env.*
+!.env.example
+
+# Virtual environments (uv)
+.venv/
+venv/
+env/
+
+# Python bytecode and caches
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Build / packaging artifacts
+build/
+dist/
+*.egg-info/
+*.egg
+.eggs/
+wheels/
+
+# Testing, linting, and type-checking caches
+.pytest_cache/
+.coverage
+.coverage.*
+htmlcov/
+.tox/
+.nox/
+.mypy_cache/
+.ruff_cache/
+.pyre/
+.pytype/
+
+# Jupyter notebooks
+.ipynb_checkpoints/
+
+# LangChain / LangGraph local artifacts
+.langgraph_api/
+.cache/
+*.sqlite
+*.sqlite3
+*.db
+
+# Local vector stores
+chroma_db/
+.chroma/
+faiss_index/
+
+# Logs
+*.log
+logs/
+
+# Editors and IDEs
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Claude Code local settings
+.claude/settings.local.json
