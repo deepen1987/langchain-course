@@ -1,3 +1,7 @@
+from typing import List, Lists
+from pydantic import BaseModel, Field 
+
+
 from dotenv import load_dotenv
 import os
 
@@ -40,11 +44,20 @@ def searchDB(query: str):
     return "Dara is a user in the system work as a software engineer in finance."
 
 
-model = os.getenv("OLLAMA_MODEL")
+class Source(BaseModel):
+    """Schema for a source used by the agent"""
+    source: str = Field (description="The url of the source")
+
+class AgentResponse(BaseModel):
+    """Schema for the response from the agent with answer and sources"""
+    answer: str = Field(description="The result of the agent's action")
+    sources: Lists[Source] = Field(default_factory=List, description="The sources used to generate the answer")
+
+model = os.getenv("OLLAMA_MODEL") 
 url = os.getenv("OLLAMA_BASE_URL")
 llm = ChatOllama(model=model, temperature=0.7, base_url=url)
 tools = [search, searchDB, TavilySearch()]
-agent = create_agent(model=llm, tools=tools, system_prompt="You are a helpful assistant.")
+agent = create_agent(model=llm, tools=tools, system_prompt="You are a helpful assistant.", response_format=AgentResponse)
 
 
 def main() -> None:
