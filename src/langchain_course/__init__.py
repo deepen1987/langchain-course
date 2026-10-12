@@ -1,4 +1,4 @@
-from typing import List, Lists
+from typing import List
 from pydantic import BaseModel, Field 
 
 
@@ -51,7 +51,7 @@ class Source(BaseModel):
 class AgentResponse(BaseModel):
     """Schema for the response from the agent with answer and sources"""
     answer: str = Field(description="The result of the agent's action")
-    sources: Lists[Source] = Field(default_factory=List, description="The sources used to generate the answer")
+    sources: List[Source] = Field(default_factory=List, description="The sources used to generate the answer")
 
 model = os.getenv("OLLAMA_MODEL") 
 url = os.getenv("OLLAMA_BASE_URL")
