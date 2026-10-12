@@ -20,7 +20,7 @@ tavily = TavilyClient()
 @tool
 def search(query: str):
     """
-    Tool that searches over internet
+    Tool that searches over internet for weather information
     Args:
         query (str): The search query
     Returns:
@@ -56,7 +56,7 @@ class AgentResponse(BaseModel):
 model = os.getenv("OLLAMA_MODEL") 
 url = os.getenv("OLLAMA_BASE_URL")
 llm = ChatOllama(model=model, temperature=0.7, base_url=url)
-tools = [search, searchDB, TavilySearch()]
+tools = [searchDB, TavilySearch(), search]
 agent = create_agent(model=llm, tools=tools, system_prompt="You are a helpful assistant.", response_format=AgentResponse)
 
 
@@ -64,12 +64,12 @@ def main() -> None:
     # message = HumanMessage(content="What's the weather like in Tokyo?")
     # result = agent.invoke({"messages": [message]})
     # print(result)
-    # message = HumanMessage(content="Who is the user named Dara?")
-    # result = agent.invoke({"messages": [message]})
-    # print(result)
-    message = HumanMessage(content="Search for 3 job postings for AI Engineer using Langgraph where the company is located in MA with main tech stack in .NET")
+    message = HumanMessage(content="Who is dara and she want to know the weather in Tokyo?")
     result = agent.invoke({"messages": [message]})
     print(result)
+    # message = HumanMessage(content="Search for 3 job postings for AI Engineer using Langgraph where the company is located in MA with main tech stack in .NET")
+    # result = agent.invoke({"messages": [message]})
+    # print(result)
 
 
 if __name__ == "__main__":
