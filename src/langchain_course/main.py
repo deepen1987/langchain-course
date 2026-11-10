@@ -6,19 +6,20 @@ from langchain_core.output_parsers import StrOutputParser
 from langchain_core.prompts import ChatPromptTemplate
 from langchain_core.runnables import RunnablePassthrough
 from langchain_core.messages import HumanMessage
-from langchain_ollama import ChatOllama
-from langchain_google_genai import GoogleGenerativeAIEmbeddings
+# from langchain_ollama import ChatOllama
+from langchain_google_genai import GoogleGenerativeAIEmbeddings, ChatGoogleGenerativeAI
 from langchain_pinecone import PineconeVectorStore
 
 load_dotenv()
 
-MODEL=os.getenv("OLLAMA_MODEL")
+MODEL=os.getenv("GEMINI_MODEL")
 OLLAMA_BASE_URL=os.getenv("OLLAMA_BASE_URL")
 
 print("Initializing Components...")
 
 embeddings = GoogleGenerativeAIEmbeddings(model="gemini-embedding-2-preview", output_dimensionality=1024)
-llm = ChatOllama(base_url=OLLAMA_BASE_URL, model=MODEL)
+# llm = ChatOllama(base_url=OLLAMA_BASE_URL, model=MODEL)
+llm = ChatGoogleGenerativeAI(model=MODEL)
 
 INDEX_NAME = os.getenv("INDEX_NAME")
 
